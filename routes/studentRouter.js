@@ -2,7 +2,7 @@ const express = require('express');
 const {validationResult } = require('express-validator');
 const newStudentValidation = require('../validations/newStudentValidation');
 
-function routes(Student) {
+function routes(Student, Course) {
 
   const studentRouter = express.Router();
 
@@ -103,6 +103,15 @@ function routes(Student) {
 
       }
 
+    });
+
+  studentRouter.route('/student/:id/courses')
+    // get student courses by student id
+    .get(async(req, res) => {
+
+      const student = await Student.findOne({ where: { id: req.params.id}, include: [ {model: Course, as: 'courses' } ] });
+      return res.status(200).json(student);
+      
     });
 
   return studentRouter;

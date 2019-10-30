@@ -12,7 +12,7 @@ const Course = require('./models').Course;
 const CourseStudent = require('./models').CourseStudent;
 
 // Routes
-const studentRouter = require('./routes/studentRouter')(Student);
+const studentRouter = require('./routes/studentRouter')(Student, Course);
 const instructorRouter = require('./routes/instructorRouter')(Instructor, Course);
 const courseRouter = require('./routes/courseRouter')(Course, CourseStudent, Student);
 

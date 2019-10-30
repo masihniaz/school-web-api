@@ -126,10 +126,10 @@ function routes(Course, CourseStudent, Student) {
 
 
   courseRouter.route('/course/:id/students')
-    // get course by id with students
+    // get course students by course id
     .get(async(req, res) => {
 
-      const course = await Course.findAll({ where: { id: req.params.id }, include: [ { model: Student, as: 'students' } ] });
+      const course = await Course.findOne({ where: { id: req.params.id }, include: [ { model: Student, as: 'students' } ] });
       return res.status(200).json(course);
 
     });
