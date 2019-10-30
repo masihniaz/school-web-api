@@ -42,8 +42,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Instructor.associate = function(models) {
+
     // Instructor may have many courses
     Instructor.hasMany(models.Course, { as: 'courses', foreignKey: 'instructorId' });
+    
   };
   return Instructor;
 };

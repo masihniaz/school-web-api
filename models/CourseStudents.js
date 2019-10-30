@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'course_students'
   });
   CourseStudent.associate = function(models) {
-    // associations can be defined here
+
   };
   return CourseStudent;
 };

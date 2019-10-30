@@ -129,8 +129,7 @@ function routes(Course, CourseStudent, Student) {
     // get course by id with students
     .get(async(req, res) => {
 
-
-      const course = await Course.findAll({ where: { id: req.params.id }, include: [ { model: CourseStudent, as: 'students'} ] });
+      const course = await Course.findAll({ where: { id: req.params.id }, include: [ { model: Student, as: 'students' } ] });
       return res.status(200).json(course);
 
     });
