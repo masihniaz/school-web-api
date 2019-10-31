@@ -4,6 +4,7 @@
     "password": "DgKcEFqx0GnyOLOF",
     "database": "school",
     "host": "localhost",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "jwtSecret": "secretKey"
   }
 }
