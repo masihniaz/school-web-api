@@ -8,12 +8,9 @@ const port = process.env.PORT || 3000;
 const jwtOpt = { session: false };
 
 // Models
-const Student = require('./models').Student;
-const Instructor = require('./models').Instructor;
-const Course = require('./models').Course;
-const CourseStudent = require('./models').CourseStudent;
-const User = require('./models').User;
-
+const {
+  Student, Instructor, Course, CourseStudent, User
+} = require('./models');
 // initialize passport
 require('./config/passport')(passport, User);
 

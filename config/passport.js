@@ -1,30 +1,19 @@
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
+const { Strategy } = require('passport-jwt');
+const { ExtractJwt } = require('passport-jwt');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('./config.json')[env];
 
 // using JwtStrategy for token-based authentication
-module.exports = function(passport, User){
-  var options = {}
-
-  // options.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt")
+module.exports = function (passport, User) {
+  const options = {};
   options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
   options.secretOrKey = config.jwtSecret;
-
-  passport.use(new JwtStrategy(options, async(jwt_payload, done) => {
-
-    const user = await User.findOne({ where: { email: jwt_payload.email } });
-    if(!user) {
-      console.log('user not found!');
-      done(err, false);
+  passport.use(new Strategy(options, async (jwtPayload, done) => {
+    const user = await User.findOne({ where: { email: jwtPayload.email } });
+    if (!user) {
+      done(true, false);
     }
-
-    console.log('user found!');
-    
-    if(user) {
-      done(null, user);
-    }
-    
+    done(null, user);
   }));
 };

@@ -1,4 +1,3 @@
-'use strict';
 const bcrypt = require('bcrypt-nodejs');
 
 const SALT_WORK_FACTOR = 12;
@@ -17,31 +16,30 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    role: { 
+    role: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
   }, {});
-  
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations can be defined here
   };
 
-  User.beforeCreate(async user => {
-    bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-      if (err) throw(err);
-      bcrypt.hash(user.password, salt, null, (err, hash) => {
-        if(err) throw(err);
+  User.beforeCreate(async (user) => {
+    bcrypt.genSalt(SALT_WORK_FACTOR, (saltErr, salt) => {
+      if (saltErr) throw (saltErr);
+      bcrypt.hash(user.password, salt, null, (hashErr, hash) => {
+        if (hashErr) throw (hashErr);
         user.password = hash;
       });
     });
   });
 
-  User.beforeUpdate(async user => {
-    bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-      if (err) throw(err);
-      bcrypt.hash(user.password, salt, null, (err, hash) => {
-        if(err) throw(err);
+  User.beforeUpdate(async (user) => {
+    bcrypt.genSalt(SALT_WORK_FACTOR, (saltErr, salt) => {
+      if (saltErr) throw (saltErr);
+      bcrypt.hash(user.password, salt, null, (hashErr, hash) => {
+        if (hashErr) throw (hashErr);
         user.password = hash;
       });
     });

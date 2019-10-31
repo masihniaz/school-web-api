@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Course = sequelize.define('Course', {
     id: {
@@ -17,13 +16,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     }
   }, {});
-  Course.associate = function(models) {
-
+  Course.associate = function (models) {
     // Course belongs to one instructor
     Course.belongsTo(models.Instructor, { as: 'instructor', foreignKey: 'instructorId' });
     // Course belongs to many students
     Course.belongsToMany(models.Student, { as: 'students', through: 'course_students', foreignKey: 'courseId' });
-    
   };
   return Course;
 };

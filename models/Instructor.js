@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Instructor = sequelize.define('Instructor', {
     id: {
@@ -29,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     phoneNumber: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       allowNull: false
     },
     createdAt: {
@@ -41,11 +39,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   }, {});
-  Instructor.associate = function(models) {
-
+  Instructor.associate = function (models) {
     // Instructor may have many courses
     Instructor.hasMany(models.Course, { as: 'courses', foreignKey: 'instructorId' });
-    
   };
   return Instructor;
 };

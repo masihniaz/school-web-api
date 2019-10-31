@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const CourseStudent = sequelize.define('CourseStudent', {
     courseId: {
@@ -12,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'course_students'
   });
-  CourseStudent.associate = function(models) {
+  CourseStudent.associate = function (models) {
 
   };
   return CourseStudent;

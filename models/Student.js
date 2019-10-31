@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Student = sequelize.define('Student', {
     name: {
@@ -25,11 +24,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {});
-  Student.associate = function(models) {
-
+  Student.associate = function (models) {
     // student belongs to many courses
     Student.belongsToMany(models.Course, { as: 'courses', through: 'course_students', foreignKey: 'studentId' });
-
   };
   return Student;
 };
