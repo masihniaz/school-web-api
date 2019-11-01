@@ -9,11 +9,12 @@ Libraries used:
 * Express validator for request validation
 
 The API contains the following modules:
+=======================================
 
 * Student Module
 
-  1. *GET /api/students* => retrieve students list
-  2. *POST /api/student* => add new student
+  1. **GET /api/students** => retrieve students list
+  2. **POST /api/student** => add new student
     ```
     {
       "name": "Loretta",
@@ -24,14 +25,14 @@ The API contains the following modules:
       "phoneNumber": "1685652128"
     }
     ```
-  3. *GET /api/student/:id*  => retrieve student by id
-  4. *PATCH /api/student/:id*  => patch student by id
-  5. *DELETE /api/student/:id* => delete student by id
-  6. *GET api/student/:id/courses* => get student courses by student id
+  3. **GET /api/student/:id**  => retrieve student by id
+  4. **PATCH /api/student/:id**  => patch student by id
+  5. **DELETE /api/student/:id** => delete student by id
+  6. **GET api/student/:id/courses** => get student courses by student id
 
 * Instructor Module
-  1. *GET /api/instructors*  => retrieve instructors list
-  2. *POST /api/instructor*  => add new instructor
+  1. **GET /api/instructors**  => retrieve instructors list
+  2. **POST /api/instructor**  => add new instructor
     ```
     {
       "name": "Humberto",
@@ -43,14 +44,14 @@ The API contains the following modules:
     }
     ```
 
-  3. *GET /api/instructor/:id* => retrieve instructor by id
-  4. *PATCH /api/instructor/:id* => patch instructor by id
-  5. *DELETE /api/instructor/:id* => delete instructor by id
-  6. *GET api/instructor/:id/courses* => get instructor courses by instructor id
+  3. **GET /api/instructor/:id** => retrieve instructor by id
+  4. **PATCH /api/instructor/:id** => patch instructor by id
+  5. **DELETE /api/instructor/:id** => delete instructor by id
+  6. **GET api/instructor/:id/courses** => get instructor courses by instructor id
 
 * Course Module
-  1. *GET /api/courses*  => retrieve courses list
-  2. *POST /api/course*  => add new course
+  1. **GET /api/courses**  => retrieve courses list
+  2. **POST /api/course**  => add new course
     ```
     {
       name: 'Angular Routing',
@@ -58,21 +59,21 @@ The API contains the following modules:
       instructorId: 5
     }
     ```
-  3. *GET /api/course/:id* => retrieve course by id
-  4. *PATCH /api/course/:id* => patch course by id
-  5. *DELETE /api/course/:id* => delete course by id
-  6. *POST /api/course/assign* => assign course to a student by courseId & studentId
+  3. **GET /api/course/:id** => retrieve course by id
+  4. **PATCH /api/course/:id** => patch course by id
+  5. **DELETE /api/course/:id** => delete course by id
+  6. **POST /api/course/assign** => assign course to a student by courseId & studentId
     ```
     {
       "courseId: 3,
       "studentId: 10
     }
     ```
-  7. *GET /api/course/:id/students* => get course students by course id
+  7. **GET /api/course/:id/students** => get course students by course id
 
 * User Module
-  1. *GET /api/auth/users* => retrieve admin users list
-  2. *POST /api/auth/user* => add new admin user
+  1. **GET /api/auth/users** => retrieve admin users list
+  2. **POST /api/auth/user** => add new admin user
     ```
     {
       name: 'Masih',
@@ -81,7 +82,7 @@ The API contains the following modules:
       role: 1
     }
     ```
-  3. *POST /api/auth/login*  => login route for admin user
+  3. **POST /api/auth/login**  => login route for admin user
     ```
     {
       "email": "admin@example.com",
