@@ -69,11 +69,19 @@ The API contains the following modules:
       "studentId: 10
     }
     ```
-  7. **GET /api/course/:id/students** => get course students by course id
+  7. **POST /api/course/unassign** => unassign course from student by courseId & studentId
+    ```
+    {
+      "courseId: 3,
+      "studentId: 10
+    }
+    ```
+  8. **GET /api/course/:id/students** => get course students by course id
 
 * User Module
   1. **GET /api/auth/users** => retrieve admin users list
-  2. **POST /api/auth/user** => add new admin user
+  2. **GET /api/auth/user/:id** => retrieve admin user by id
+  3. **POST /api/auth/user** => add new admin user
     ```
     {
       name: 'Masih',
@@ -82,7 +90,7 @@ The API contains the following modules:
       role: 1
     }
     ```
-  3. **POST /api/auth/login**  => login route for admin user
+  4. **POST /api/auth/login**  => login route for admin user
     ```
     {
       "email": "admin@example.com",
