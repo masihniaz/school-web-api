@@ -2,6 +2,7 @@ const express = require('express');
 const { validationResult } = require('express-validator');
 const newCourseValidation = require('../validations/newCourseValidation');
 const assignStudentToCourseValidation = require('../validations/assignStudentToCourseValidation');
+const unassignStudentFromCourseValidation = require('../validations/unassignStudentFromCourseValidation');
 
 function routes(Course, CourseStudent, Student) {
   const courseRouter = express.Router();
@@ -93,6 +94,28 @@ function routes(Course, CourseStudent, Student) {
       const newCourseStudent = await CourseStudent.create(req.body);
       return res.status(201).json(newCourseStudent);
     });
+
+  courseRouter.route('/course/unassign')
+  // assign student to course
+  .post(unassignStudentFromCourseValidation, async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // 422 Unprocessable Entity
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    const { studentId, courseId } = req.body;
+
+    const courseStudent = await CourseStudent.findOne({ where: { studentId, courseId } });
+
+    if (!courseStudent) {
+      // 404 not found, student or course does not exist
+      return res.status(404).json({ error: 'Course or student does not exist' });
+    }
+    await courseStudent.destroy({ force: true });
+        // 200 OK
+    return res.status(200).json(courseStudent);
+  });
 
   courseRouter.route('/course/:id/students')
     // get course students by course id

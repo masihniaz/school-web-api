@@ -54,6 +54,31 @@ function routes(User) {
         return res.status(500);
       }
     });
+  
+  authRouter.route('/auth/user/:id', passport.authenticate('jwt', jwtOpt))
+    .get(async (req, res) => {
+      const user = await User.findOne({ where: { id: req.params.id } });
+
+      if (!user) {
+        // 404 bad request
+        return res.status(404).json(user);
+      }
+      // 200 OK
+      const { id, name, email, role } = user;
+      return res.status(200).json({ id, name, email, role });
+    })
+    .delete(async (req, res) => {
+      const user = await User.findOne({ where: { id: req.params.id } });
+
+      if (user) {
+        // hard delete
+        await user.destroy({ force: true });
+        // 200 OK
+        return res.status(200).json(user);
+      }
+      // 404 bad request
+      return res.status(404).json({ error: `cannot find user with id ${req.params.id}.` });
+    })
 
   authRouter.route('/auth/login')
     .post(loginValidation, async (req, res) => {

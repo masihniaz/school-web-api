@@ -84,7 +84,7 @@ function routes(Instructor, Course) {
   // get instructor with courses
   instructorRouter.route('/instructor/:id/courses')
     .get(async (req, res) => {
-      const instructor = await Instructor.findAll({ where: { id: req.params.id }, include: [{ model: Course, as: 'courses' }] });
+      const instructor = await Instructor.findOne({ where: { id: req.params.id }, include: [{ model: Course, as: 'courses' }] });
       return res.status(200).json(instructor);
     });
 
