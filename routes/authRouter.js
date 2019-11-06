@@ -101,8 +101,9 @@ function routes(User) {
 
       const user = await User.findOne({ where: { email: req.body.email } });
 
+      // 404 not found
       if (!user) {
-        return res.status(400).json({ error: 'user not found.' });
+        return res.status(404).json({ error: 'user not found.' });
       }
 
       const isMatch = await isPasswordValid(req.body.password, user.password);
