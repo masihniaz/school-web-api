@@ -1,6 +1,7 @@
 const express = require('express');
 const { validationResult } = require('express-validator');
 const newInstructorValidation = require('../validations/newInstructorValidation');
+const assignInstructorToCourseValidation = require('../validations/assignInstructorToCourseValidation');
 
 function routes(Instructor, Course) {
   const instructorRouter = express.Router();
@@ -39,6 +40,27 @@ function routes(Instructor, Course) {
         // 500 internal server error
         return res.status(500);
       }
+    });
+
+  // assign instructor to course
+  instructorRouter.route('/instructor/assign')
+    .post(assignInstructorToCourseValidation, async (req, res) => {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        // 422 Unprocessable Entity
+        return res.status(422).json({ errors: errors.array() });
+      }
+
+      const { instructorId, courseId } = req.body;
+
+      const course = Course.findOne({ where: { id: courseId } });
+
+      if (course) {
+        course.update({ instructorId });
+        return res.status(200).json(course);
+      }
+      return res.status(404).json({ error: `Course with course id ${courseId} does not exist` });
     });
 
   // instructor resource by id
