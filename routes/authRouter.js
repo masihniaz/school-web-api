@@ -67,6 +67,16 @@ function routes(User) {
       const { id, name, email, role } = user;
       return res.status(200).json({ id, name, email, role });
     })
+    .patch(async (req, res) => {
+      const user = await User.findOne({ where: { id: req.params.id } });
+      if (user) {
+        user.update(req.body);
+        // 200 OK
+        return res.status(200).json(user);
+      }
+      // 404 bad request
+      return res.status(404).json({ error: `cannot find user with id ${req.params.id}` });
+    })
     .delete(async (req, res) => {
       const user = await User.findOne({ where: { id: req.params.id } });
 
@@ -108,9 +118,9 @@ function routes(User) {
       const jwtPayloadToSign = {
         id, name, email, role
       };
-      const token = jwt.sign(jwtPayloadToSign, config.jwtSecret);
+      const token = jwt.sign(jwtPayloadToSign, config.jwtSecret, { expiresIn: 1200 }); // 20 minutes expiry time
       // 200 OK
-      return res.status(200).json(token);
+      return res.status(200).json({ token });
     });
 
   return authRouter;

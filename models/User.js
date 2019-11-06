@@ -35,15 +35,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   });
 
-  User.beforeUpdate(async (user) => {
-    bcrypt.genSalt(SALT_WORK_FACTOR, (saltErr, salt) => {
-      if (saltErr) throw (saltErr);
-      bcrypt.hash(user.password, salt, null, (hashErr, hash) => {
-        if (hashErr) throw (hashErr);
-        user.password = hash;
-      });
-    });
-  });
-
   return User;
 };
